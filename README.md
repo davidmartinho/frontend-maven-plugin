@@ -6,18 +6,18 @@ watching for browserify bundle file changes.
 
 ## Installation
 * Clone this repo
-'''
+```
 git clone 
-'''
+```
 
 * Run maven install
-'''
+```
 mvn install
-'''
+```
 
 ## Usage
 * Include the plugin on the pom file of your webapp
-'''
+```
 <plugin>
     <groupId>org.fenixedu</groupId>
     <artifactId>frontend-maven-plugin</artifactId>
@@ -36,14 +36,14 @@ mvn install
         </outputFile>
     </configuration>
 </plugin>
-'''
+```
 
 * Replace CONTEXT_PATH, PORT, STATIC_FILES_DIRECTORY, BROWSERIFY_ENTRY_FILE.js
 and BROWSERIFY_BUNDLE_FILE.js according to your webapp settings
 
 * On your webapp root directory run the following command:
-'''
+```
 mvn frontend:server
-'''
+```
 
-* Open your browser on http://localhost:PORT/CONTEXT_PATH and enjoy
+* Open your browser on <a href="http://localhost:PORT/CONTEXT_PATH">http://localhost:PORT/CONTEXT_PATH</a> and enjoy
