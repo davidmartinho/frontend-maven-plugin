@@ -17,7 +17,7 @@ mvn install
 
 ## Usage
 * Include the plugin on the pom file of your webapp
-```
+```xml
 <plugin>
     <groupId>org.fenixedu</groupId>
     <artifactId>frontend-maven-plugin</artifactId>
