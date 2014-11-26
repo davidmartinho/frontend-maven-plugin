@@ -15,7 +15,7 @@ import org.apache.tomcat.maven.plugin.tomcat7.run.RunMojo;
 @Execute(phase = LifecyclePhase.PROCESS_CLASSES)
 public final class ServerMojo extends RunMojo {
 
-    @Parameter(defaultValue = "${basedir}/target", property = "workingDirectory", required = false)
+    @Parameter(defaultValue = "${basedir}", property = "workingDirectory", required = false)
     private File workingDirectory;
 
     @Parameter(defaultValue = "${basedir}", property = "sourceFile", required = false)
