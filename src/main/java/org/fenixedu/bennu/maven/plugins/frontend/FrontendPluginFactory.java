@@ -36,4 +36,12 @@ public final class FrontendPluginFactory {
     public WatchifyInstaller getWatchifyInstaller() {
         return new DefaultWatchifyInstaller(defaultPlatform, workingDirectory);
     }
+
+    public BowerInstaller getBowerInstaller() {
+        return new DefaultBowerInstaller(defaultPlatform, workingDirectory);
+    }
+
+    public DefaultBowerRunner getBowerRunner() {
+        return new DefaultBowerRunner(defaultPlatform, workingDirectory);
+    }
 }

@@ -9,8 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 final class ProcessExecutionException extends Exception {
+
+    private static final long serialVersionUID = -2705939760133032644L;
+
     public ProcessExecutionException(String message) {
         super(message);
     }
@@ -75,7 +79,9 @@ final class ProcessExecutor {
     }
 
     private ProcessBuilder createProcessBuilder() {
-        return new ProcessBuilder(getPlatformIndependentCommand()).directory(workingDirectory);
+        List<String> platformIndependentCommand = getPlatformIndependentCommand();
+        LoggerFactory.getLogger(getClass()).info("Running Command {}", platformIndependentCommand);
+        return new ProcessBuilder(platformIndependentCommand).directory(workingDirectory);
     }
 
     private List<String> getPlatformIndependentCommand() {
