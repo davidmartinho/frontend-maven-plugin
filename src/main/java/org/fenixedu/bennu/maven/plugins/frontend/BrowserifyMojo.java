@@ -12,7 +12,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
 @Mojo(name = "browserify", requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
-@Execute(phase = LifecyclePhase.COMPILE)
+@Execute(phase = LifecyclePhase.GENERATE_RESOURCES)
 public final class BrowserifyMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${basedir}", property = "workingDirectory", required = false)
