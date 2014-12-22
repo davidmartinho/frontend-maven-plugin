@@ -41,7 +41,16 @@ public final class FrontendPluginFactory {
         return new DefaultBowerInstaller(defaultPlatform, workingDirectory);
     }
 
-    public DefaultBowerRunner getBowerRunner() {
+    public BowerRunner getBowerRunner() {
         return new DefaultBowerRunner(defaultPlatform, workingDirectory);
+    }
+
+    public UglifyRunner getUglifyRunner() {
+        return new DefaultUglifyRunner(defaultPlatform, workingDirectory);
+    }
+
+    public UglifyInstaller getUglifyInstaller() {
+
+        return null;
     }
 }
