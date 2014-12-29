@@ -4,8 +4,8 @@ import java.io.File;
 
 public interface UglifyRunner {
 
-    static final String TASK_NAME = "uglify";
-    static final String TASK_LOCATION = "/node_modules/uglify/bin/uglify";
+    static final String TASK_NAME = "uglify-js";
+    static final String TASK_LOCATION = "/node_modules/uglify-js/bin/uglifyjs";
 
     public void execute(String args, File sourceFile) throws TaskRunnerException;
 

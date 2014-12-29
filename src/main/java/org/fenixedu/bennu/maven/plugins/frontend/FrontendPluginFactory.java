@@ -16,6 +16,10 @@ public final class FrontendPluginFactory {
         this.proxy = proxy;
     }
 
+    public NPMRunner getNPMRunner() {
+        return new DefaultNPMRunner(defaultPlatform, workingDirectory, proxy);
+    }
+
     public NodeAndNPMInstaller getNodeAndNPMInstaller() {
         return new DefaultNodeAndNPMInstaller(workingDirectory, defaultPlatform, new DefaultArchiveExtractor(),
                 new DefaultFileDownloader(proxy));

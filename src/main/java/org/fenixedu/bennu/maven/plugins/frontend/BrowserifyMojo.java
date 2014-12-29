@@ -12,32 +12,33 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
 @Mojo(name = "browserify", requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
-@Execute(phase = LifecyclePhase.GENERATE_RESOURCES)
-public final class BrowserifyMojo extends AbstractMojo {
+@Execute(phase = LifecyclePhase.GENERATE_SOURCES)
+public class BrowserifyMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${basedir}", property = "workingDirectory", required = false)
-    private File workingDirectory;
+    protected File workingDirectory;
 
     @Parameter(defaultValue = "${basedir}", property = "sourceFile", required = false)
-    private File sourceFile;
+    protected File sourceFile;
 
     @Parameter(defaultValue = "${basedir}", property = "outputFile", required = false)
-    private File outputFile;
+    protected File outputFile;
 
     @Parameter(property = "nodeVersion", defaultValue = "v0.10.18")
-    private String nodeVersion;
+    protected String nodeVersion;
 
     @Parameter(property = "npmVersion", defaultValue = "1.3.8")
-    private String npmVersion;
+    protected String npmVersion;
 
     @Parameter(property = "arguments")
-    private String arguments;
+    protected String arguments;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         MojoUtils.setSLF4jLogger(getLog());
         try {
             new FrontendPluginFactory(workingDirectory).getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
+            new FrontendPluginFactory(workingDirectory).getNPMRunner().execute(arguments);
             new FrontendPluginFactory(workingDirectory).getBowerInstaller().install();
             new FrontendPluginFactory(workingDirectory).getBowerRunner().execute(arguments);
             new FrontendPluginFactory(workingDirectory).getBrowserifyInstaller().install();

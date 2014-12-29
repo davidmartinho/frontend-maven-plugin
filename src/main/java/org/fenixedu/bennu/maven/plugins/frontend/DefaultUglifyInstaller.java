@@ -16,11 +16,11 @@ public class DefaultUglifyInstaller extends NodeTaskExecutor implements UglifyIn
 
     @Override
     public void install() throws TaskRunnerException {
-        File uglifyFolder = new File(getWorkingDirectory().getAbsolutePath() + "/node_modules/uglify");
+        File uglifyFolder = new File(getWorkingDirectory().getAbsolutePath() + "/node_modules/uglify-js");
         if (uglifyFolder.exists()) {
             logger.info("Skipping installation of uglify because it's already installed in {}", uglifyFolder.getAbsolutePath());
         } else {
-            super.execute("install uglify");
+            super.execute("install uglify-js");
         }
     }
 }
