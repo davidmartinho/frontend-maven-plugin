@@ -21,6 +21,9 @@ public final class UglifyMojo extends AbstractMojo {
     @Parameter(defaultValue = "${basedir}", property = "sourceFile", required = false)
     protected File sourceFile;
 
+    @Parameter(defaultValue = "${basedir}", property = "vendorsSourceFile", required = false)
+    protected File vendorsSourceFile;
+
     @Parameter(property = "nodeVersion", defaultValue = "v0.10.18")
     protected String nodeVersion;
 
@@ -34,8 +37,12 @@ public final class UglifyMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         MojoUtils.setSLF4jLogger(getLog());
         try {
-            new FrontendPluginFactory(workingDirectory).getUglifyInstaller().install();
-            new FrontendPluginFactory(workingDirectory).getUglifyRunner().execute(arguments, sourceFile);
+            FrontendPluginFactory frontendPluginFactory = new FrontendPluginFactory(workingDirectory);
+            frontendPluginFactory.getUglifyInstaller().install();
+            if (vendorsSourceFile != null) {
+                frontendPluginFactory.getUglifyRunner().execute(arguments, vendorsSourceFile);
+            }
+            frontendPluginFactory.getUglifyRunner().execute(arguments, sourceFile);
         } catch (TaskRunnerException e) {
             e.printStackTrace();
         }

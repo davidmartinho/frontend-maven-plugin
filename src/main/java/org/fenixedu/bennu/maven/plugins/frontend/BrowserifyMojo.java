@@ -24,6 +24,12 @@ public class BrowserifyMojo extends AbstractMojo {
     @Parameter(defaultValue = "${basedir}", property = "outputFile", required = false)
     protected File outputFile;
 
+    @Parameter(property = "vendorsSourceFile", required = false)
+    protected File vendorsSourceFile;
+
+    @Parameter(defaultValue = "${basedir}", property = "vendorsOutputFile", required = false)
+    protected File vendorsOutputFile;
+
     @Parameter(property = "nodeVersion", defaultValue = "v0.10.18")
     protected String nodeVersion;
 
@@ -37,12 +43,19 @@ public class BrowserifyMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         MojoUtils.setSLF4jLogger(getLog());
         try {
-            new FrontendPluginFactory(workingDirectory).getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
-            new FrontendPluginFactory(workingDirectory).getNPMRunner().execute(arguments);
-            new FrontendPluginFactory(workingDirectory).getBowerInstaller().install();
-            new FrontendPluginFactory(workingDirectory).getBowerRunner().execute(arguments);
-            new FrontendPluginFactory(workingDirectory).getBrowserifyInstaller().install();
-            new FrontendPluginFactory(workingDirectory).getBrowserifyRunner().execute(arguments, sourceFile, outputFile);
+            FrontendPluginFactory pluginFactory = new FrontendPluginFactory(workingDirectory);
+            pluginFactory.getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
+            pluginFactory.getNPMRunner().execute(arguments);
+            pluginFactory.getBowerInstaller().install();
+            pluginFactory.getBowerRunner().execute(arguments);
+            pluginFactory.getBrowserifyInstaller().install();
+
+            // Run browserify for vendors
+            if (vendorsSourceFile != null && vendorsOutputFile != null) {
+                pluginFactory.getBrowserifyRunner().execute(arguments, vendorsSourceFile, vendorsOutputFile);
+            }
+
+            pluginFactory.getBrowserifyRunner().execute(arguments, sourceFile, outputFile);
         } catch (InstallationException | TaskRunnerException e) {
             e.printStackTrace();
         }
