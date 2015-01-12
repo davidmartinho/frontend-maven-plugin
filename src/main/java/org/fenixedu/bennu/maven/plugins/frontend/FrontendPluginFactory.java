@@ -29,6 +29,10 @@ public final class FrontendPluginFactory {
         return new DefaultBrowserifyInstaller(defaultPlatform, workingDirectory);
     }
 
+    public NPMConfigurer getNPMConfigurer(String pythonPath) {
+        return new NPMConfigurer(defaultPlatform, workingDirectory, pythonPath);
+    }
+
     public BrowserifyRunner getBrowserifyRunner() {
         return new DefaultBrowserifyRunner(defaultPlatform, workingDirectory);
     }

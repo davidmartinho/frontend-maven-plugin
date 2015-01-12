@@ -15,7 +15,7 @@ public class DefaultNPMRunner extends NodeTaskExecutor implements NPMRunner {
     private static List<String> buildArguments(ProxyConfig proxy) {
         List<String> arguments = new ArrayList<String>();
         arguments.add("install");
-        arguments.add("--color=false");
+        //arguments.add("--color=false");
         if (proxy != null) {
             if (proxy.isSecure()) {
                 arguments.add("--https-proxy=" + proxy.getUri().toString());

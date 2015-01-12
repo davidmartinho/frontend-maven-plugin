@@ -36,6 +36,9 @@ public class BrowserifyMojo extends AbstractMojo {
     @Parameter(property = "npmVersion", defaultValue = "1.3.8")
     protected String npmVersion;
 
+    @Parameter(property = "pythonPath", defaultValue = "/usr/bin/python2.7")
+    protected String pythonPath;
+
     @Parameter(property = "arguments")
     protected String arguments;
 
@@ -45,6 +48,7 @@ public class BrowserifyMojo extends AbstractMojo {
         try {
             FrontendPluginFactory pluginFactory = new FrontendPluginFactory(workingDirectory);
             pluginFactory.getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
+            pluginFactory.getNPMConfigurer(pythonPath).execute(arguments);
             pluginFactory.getNPMRunner().execute(arguments);
             pluginFactory.getBowerInstaller().install();
             pluginFactory.getBowerRunner().execute(arguments);
