@@ -1,4 +1,5 @@
-package org.fenixedu.bennu.maven.plugins.frontend;
+package org.fenixedu.bennu.maven.plugins.frontend.exception;
+
 
 public class TaskRunnerException extends Exception {
 

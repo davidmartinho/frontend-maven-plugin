@@ -1,4 +1,4 @@
-package org.fenixedu.bennu.maven.plugins.frontend;
+package org.fenixedu.bennu.maven.plugins.frontend.mojo;
 
 import java.io.File;
 
@@ -10,6 +10,8 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.fenixedu.bennu.maven.plugins.frontend.FrontendPluginFactory;
+import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
 
 @Mojo(name = "browserify", requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
 @Execute(phase = LifecyclePhase.GENERATE_SOURCES)
@@ -45,11 +47,9 @@ public class BrowserifyMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         MojoUtils.setSLF4jLogger(getLog());
+        FrontendPluginFactory pluginFactory = new FrontendPluginFactory(workingDirectory);
         try {
-            FrontendPluginFactory pluginFactory = new FrontendPluginFactory(workingDirectory);
-            pluginFactory.getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
-            pluginFactory.getNPMConfigurer(pythonPath).execute(arguments);
-            pluginFactory.getNPMRunner().execute(arguments);
+
             pluginFactory.getBowerInstaller().install();
             pluginFactory.getDebowerifyInstaller().install();
             pluginFactory.getBowerRunner().execute(arguments);
@@ -61,9 +61,8 @@ public class BrowserifyMojo extends AbstractMojo {
             }
 
             pluginFactory.getBrowserifyRunner().execute(arguments, sourceFile, outputFile);
-        } catch (InstallationException | TaskRunnerException e) {
-            e.printStackTrace();
+        } catch (TaskRunnerException e) {
+            throw new MojoExecutionException("Could not execute browserify goal", e);
         }
     }
-
 }

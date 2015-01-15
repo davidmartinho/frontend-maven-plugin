@@ -1,9 +1,10 @@
-package org.fenixedu.bennu.maven.plugins.frontend;
+package org.fenixedu.bennu.maven.plugins.frontend.mojo;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.settings.Proxy;
+import org.fenixedu.bennu.maven.plugins.frontend.ProxyConfig;
 import org.slf4j.impl.StaticLoggerBinder;
 
 class MojoUtils {

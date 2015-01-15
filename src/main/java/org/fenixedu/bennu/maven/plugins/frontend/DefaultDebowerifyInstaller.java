@@ -3,6 +3,7 @@ package org.fenixedu.bennu.maven.plugins.frontend;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

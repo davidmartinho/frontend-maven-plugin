@@ -3,6 +3,8 @@ package org.fenixedu.bennu.maven.plugins.frontend;
 import java.io.File;
 import java.util.Arrays;
 
+import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
+
 public class DefaultWatchifyRunner extends NodeTaskExecutor implements WatchifyRunner {
 
     public DefaultWatchifyRunner(Platform platform, File workingDirectory) {

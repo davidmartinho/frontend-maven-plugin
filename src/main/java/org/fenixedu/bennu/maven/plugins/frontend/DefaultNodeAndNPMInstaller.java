@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.plexus.util.FileUtils;
+import org.fenixedu.bennu.maven.plugins.frontend.exception.InstallationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

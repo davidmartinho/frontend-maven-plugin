@@ -1,5 +1,7 @@
 package org.fenixedu.bennu.maven.plugins.frontend;
 
+import org.fenixedu.bennu.maven.plugins.frontend.exception.InstallationException;
+
 public interface NodeAndNPMInstaller {
 
     String DEFAULT_NODEJS_DOWNLOAD_ROOT = "http://nodejs.org/dist/";

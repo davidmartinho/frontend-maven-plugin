@@ -3,6 +3,8 @@ package org.fenixedu.bennu.maven.plugins.frontend;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
+
 public class DefaultUglifyRunner extends NodeTaskExecutor implements UglifyRunner {
 
     public DefaultUglifyRunner(Platform platform, File workingDirectory) {
