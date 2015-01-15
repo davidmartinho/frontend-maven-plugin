@@ -51,6 +51,7 @@ public class BrowserifyMojo extends AbstractMojo {
             pluginFactory.getNPMConfigurer(pythonPath).execute(arguments);
             pluginFactory.getNPMRunner().execute(arguments);
             pluginFactory.getBowerInstaller().install();
+            pluginFactory.getDebowerifyInstaller().install();
             pluginFactory.getBowerRunner().execute(arguments);
             pluginFactory.getBrowserifyInstaller().install();
 

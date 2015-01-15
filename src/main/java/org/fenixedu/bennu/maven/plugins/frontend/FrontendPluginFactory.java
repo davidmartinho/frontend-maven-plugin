@@ -60,4 +60,8 @@ public final class FrontendPluginFactory {
     public UglifyRunner getUglifyRunner() {
         return new DefaultUglifyRunner(defaultPlatform, workingDirectory);
     }
+
+    public DebowerifyInstaller getDebowerifyInstaller() {
+        return new DefaultDebowerifyInstaller(defaultPlatform, workingDirectory);
+    }
 }
