@@ -13,6 +13,6 @@ public class DefaultBrowserifyRunner extends NodeTaskExecutor implements Browser
 
     @Override
     public void execute(String args, File sourceFile, File outputFile) throws TaskRunnerException {
-        super.execute(String.format("%s -t debowerify -o %s", sourceFile.getAbsolutePath(), outputFile.getAbsolutePath()));
+        super.execute(String.format("-t debowerify %s -o %s", sourceFile.getAbsolutePath(), outputFile.getAbsolutePath()));
     }
 }

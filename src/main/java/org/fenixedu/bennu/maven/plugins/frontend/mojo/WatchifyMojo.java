@@ -12,12 +12,18 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.fenixedu.bennu.maven.plugins.frontend.FrontendPluginFactory;
 import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
 
-@Mojo(name = "bower", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.TEST,
-threadSafe = true)
-public class BowerMojo extends AbstractMojo {
+@Mojo(name = "watchify", defaultPhase = LifecyclePhase.PROCESS_SOURCES, requiresDependencyResolution = ResolutionScope.TEST,
+        threadSafe = true)
+public class WatchifyMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${basedir}", property = "workingDirectory", required = false)
     protected File workingDirectory;
+
+    @Parameter(defaultValue = "${basedir}", property = "sourceFile", required = false)
+    protected File sourceFile;
+
+    @Parameter(defaultValue = "${basedir}", property = "outputFile", required = false)
+    protected File outputFile;
 
     @Parameter(property = "arguments")
     protected String arguments;
@@ -27,11 +33,13 @@ public class BowerMojo extends AbstractMojo {
         MojoUtils.setSLF4jLogger(getLog());
         FrontendPluginFactory pluginFactory = new FrontendPluginFactory(workingDirectory);
         try {
-            pluginFactory.getBowerInstaller().install();
+
+            pluginFactory.getWatchifyInstaller().install();
             pluginFactory.getDebowerifyInstaller().install();
-            pluginFactory.getBowerRunner().execute(arguments);
+
+            pluginFactory.getWatchifyRunner().execute(arguments, sourceFile, outputFile);
         } catch (TaskRunnerException e) {
-            throw new MojoExecutionException("Could not run bower goal", e);
+            throw new MojoExecutionException("Could not execute watchify goal", e);
         }
     }
 }

@@ -9,8 +9,6 @@ import java.util.concurrent.Future;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Execute;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
@@ -18,7 +16,6 @@ import org.apache.tomcat.maven.plugin.tomcat7.run.RunMojo;
 import org.fenixedu.bennu.maven.plugins.frontend.FrontendPluginFactory;
 
 @Mojo(name = "server", requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
-@Execute(phase = LifecyclePhase.PROCESS_CLASSES)
 public final class ServerMojo extends RunMojo {
 
     @Parameter(defaultValue = "${basedir}", property = "workingDirectory", required = false)
@@ -45,6 +42,7 @@ public final class ServerMojo extends RunMojo {
         ExecutorService executor = Executors.newFixedThreadPool(1);
         Future<Void> future = executor.submit(runner);
         executor.shutdown();
+        super.execute();
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
@@ -65,6 +63,7 @@ public final class ServerMojo extends RunMojo {
             MojoUtils.setSLF4jLogger(serverMojo.getLog());
             new FrontendPluginFactory(serverMojo.workingDirectory).getNodeAndNPMInstaller().install(nodeVersion, npmVersion);
             new FrontendPluginFactory(serverMojo.workingDirectory).getBrowserifyInstaller().install();
+            new FrontendPluginFactory(serverMojo.workingDirectory).getDebowerifyInstaller().install();
             new FrontendPluginFactory(serverMojo.workingDirectory).getWatchifyInstaller().install();
             new FrontendPluginFactory(serverMojo.workingDirectory).getBrowserifyRunner().execute(arguments, sourceFile,
                     outputFile);

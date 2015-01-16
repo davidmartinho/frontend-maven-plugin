@@ -11,7 +11,8 @@ public class DefaultWatchifyRunner extends NodeTaskExecutor implements WatchifyR
         super(TASK_NAME, TASK_LOCATION, workingDirectory, platform, Arrays.asList("-v"));
     }
 
+    @Override
     public void execute(String args, File sourceFile, File outputFile) throws TaskRunnerException {
-        super.execute(String.format("%s -o %s", sourceFile.getAbsolutePath(), outputFile.getAbsolutePath()));
+        super.execute(String.format("-t debowerify  %s -o %s", sourceFile.getAbsolutePath(), outputFile.getAbsolutePath()));
     }
 }
