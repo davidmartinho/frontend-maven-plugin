@@ -36,7 +36,7 @@ public abstract class NodeTaskExecutor {
         return workingDirectory;
     }
 
-    public final void execute(String args) throws TaskRunnerException {
+    public void execute(String args) throws TaskRunnerException {
         final String absoluteTaskLocation = workingDirectory + normalize(taskLocation);
         final List<String> arguments = getArguments(args);
         logger.info("Running " + taskToString(taskName, arguments) + " in " + workingDirectory);

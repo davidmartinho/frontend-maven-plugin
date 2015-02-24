@@ -123,6 +123,7 @@ public final class DefaultNodeAndNPMInstaller implements NodeAndNPMInstaller {
             }
         }
 
+        @SuppressWarnings("unchecked")
         private boolean npmIsAlreadyInstalled() {
             try {
                 final File npmPackageJson = new File(workingDirectory + Utils.normalize("/node/npm/package.json"));

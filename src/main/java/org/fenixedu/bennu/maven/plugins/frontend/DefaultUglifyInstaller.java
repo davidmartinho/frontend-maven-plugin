@@ -1,7 +1,7 @@
 package org.fenixedu.bennu.maven.plugins.frontend;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.fenixedu.bennu.maven.plugins.frontend.exception.TaskRunnerException;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ public class DefaultUglifyInstaller extends NodeTaskExecutor implements UglifyIn
     private static final Logger logger = LoggerFactory.getLogger(DefaultUglifyInstaller.class);
 
     public DefaultUglifyInstaller(Platform platform, File workingDirectory) {
-        super(TASK_NAME, TASK_LOCATION, workingDirectory, platform, Arrays.asList(""));
+        super(TASK_NAME, TASK_LOCATION, workingDirectory, platform, new ArrayList<>());
     }
 
     @Override

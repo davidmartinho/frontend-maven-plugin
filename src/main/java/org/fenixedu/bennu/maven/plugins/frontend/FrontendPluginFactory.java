@@ -64,4 +64,16 @@ public final class FrontendPluginFactory {
     public DebowerifyInstaller getDebowerifyInstaller() {
         return new DefaultDebowerifyInstaller(defaultPlatform, workingDirectory);
     }
+
+    public BowerLink getBowerLink() {
+        return new DefaultBowerLink(defaultPlatform, workingDirectory);
+    }
+
+    public HttpServerInstaller getHttpServerInstaller() {
+        return new DefaultHttpServerInstaller(defaultPlatform, workingDirectory);
+    }
+
+    public HttpServerRunner getHttpServerRunner() {
+        return new DefaultHttpServerRunner(defaultPlatform, workingDirectory);
+    }
 }
