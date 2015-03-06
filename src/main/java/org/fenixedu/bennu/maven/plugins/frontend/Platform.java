@@ -28,7 +28,7 @@ enum OS {
     }
 }
 
-class Platform {
+public class Platform {
     private final OS os;
     private final Architecture architecture;
 

@@ -2,6 +2,13 @@ package org.fenixedu.bennu.maven.plugins.frontend;
 
 import java.io.File;
 
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultBowerInstaller;
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultBrowserifyInstaller;
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultDebowerifyInstaller;
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultHttpServerInstaller;
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultUglifyInstaller;
+import org.fenixedu.bennu.maven.plugins.frontend.installer.DefaultWatchifyInstaller;
+
 public final class FrontendPluginFactory {
     private static final Platform defaultPlatform = Platform.guess();
     private final File workingDirectory;
@@ -25,7 +32,7 @@ public final class FrontendPluginFactory {
                 new DefaultFileDownloader(proxy));
     }
 
-    public BrowserifyInstaller getBrowserifyInstaller() {
+    public NPMModuleInstaller getBrowserifyInstaller() {
         return new DefaultBrowserifyInstaller(defaultPlatform, workingDirectory);
     }
 
@@ -41,11 +48,11 @@ public final class FrontendPluginFactory {
         return new DefaultWatchifyRunner(defaultPlatform, workingDirectory);
     }
 
-    public WatchifyInstaller getWatchifyInstaller() {
+    public NPMModuleInstaller getWatchifyInstaller() {
         return new DefaultWatchifyInstaller(defaultPlatform, workingDirectory);
     }
 
-    public BowerInstaller getBowerInstaller() {
+    public NPMModuleInstaller getBowerInstaller() {
         return new DefaultBowerInstaller(defaultPlatform, workingDirectory);
     }
 
@@ -53,7 +60,7 @@ public final class FrontendPluginFactory {
         return new DefaultBowerRunner(defaultPlatform, workingDirectory);
     }
 
-    public UglifyInstaller getUglifyInstaller() {
+    public NPMModuleInstaller getUglifyInstaller() {
         return new DefaultUglifyInstaller(defaultPlatform, workingDirectory);
     }
 
@@ -61,7 +68,7 @@ public final class FrontendPluginFactory {
         return new DefaultUglifyRunner(defaultPlatform, workingDirectory);
     }
 
-    public DebowerifyInstaller getDebowerifyInstaller() {
+    public NPMModuleInstaller getDebowerifyInstaller() {
         return new DefaultDebowerifyInstaller(defaultPlatform, workingDirectory);
     }
 
@@ -69,7 +76,7 @@ public final class FrontendPluginFactory {
         return new DefaultBowerLink(defaultPlatform, workingDirectory);
     }
 
-    public HttpServerInstaller getHttpServerInstaller() {
+    public NPMModuleInstaller getHttpServerInstaller() {
         return new DefaultHttpServerInstaller(defaultPlatform, workingDirectory);
     }
 
