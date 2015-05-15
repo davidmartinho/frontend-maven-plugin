@@ -13,6 +13,7 @@ public class DefaultWatchifyRunner extends NodeTaskExecutor implements WatchifyR
 
     @Override
     public void execute(String args, File sourceFile, File outputFile) throws TaskRunnerException {
+    	outputFile.getParentFile().mkdirs();
         super.execute(String.format("-t debowerify  %s -o %s", sourceFile.getAbsolutePath(), outputFile.getAbsolutePath()));
     }
 }
